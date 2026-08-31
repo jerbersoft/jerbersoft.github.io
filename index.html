@@ -1,5 +1,223 @@
----
-layout: home
-title: My website
-subtitle: This is where I will tell my friends way too much about me
----
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open source — Herbert Sabanal</title>
+<meta name="description" content="Open-source .NET clients for market data APIs, and the documentation published alongside them.">
+<link rel="canonical" href="https://jerbersoft.github.io/">
+<meta name="color-scheme" content="light dark">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Open source — Herbert Sabanal">
+<meta property="og:description" content="Open-source .NET clients for market data APIs, and the documentation published alongside them.">
+<meta property="og:url" content="https://jerbersoft.github.io/">
+<meta property="og:locale" content="en_GB">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+  /* Tokens lifted from herbertsabanal.com so this page reads as the same hand. Light is the
+     base; only what changes is redefined under prefers-color-scheme. */
+  :root {
+    --paper:        #e9ebed;
+    --paper-raised: #f4f5f6;
+    --ink:          #101822;
+    --ink-muted:    #59646f;
+    --rule:         #c6ccd1;
+    --accent:       #4b5a2c;   /* the "markets" topic colour; both projects are market data */
+
+    --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    --font-body:    "Source Serif 4", ui-serif, Georgia, serif;
+    --font-mono:    ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:        #101822;
+      --paper-raised: #17212d;
+      --ink:          #dfe4e8;
+      --ink-muted:    #8c99a5;
+      --rule:         #2c3a49;
+      --accent:       #a3b478;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { width: 100%; max-width: 48rem; margin-inline: auto; padding-inline: 1.25rem; }
+
+  a { color: inherit; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-size: .6875rem;
+    font-weight: 500;
+  }
+
+  /* Header */
+  header { padding-block: 2rem 2.5rem; }
+  @media (min-width: 640px) { header { padding-block: 3rem 2.5rem; } }
+  header nav { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -.02em;
+    text-decoration: none;
+  }
+  .navlinks { display: flex; gap: 1.5rem; }
+  .navlinks a { text-decoration: none; }
+  .navlinks a:hover { color: var(--ink); }
+
+  /* Hero */
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 3.75rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    margin: 0;
+  }
+  .lead {
+    margin: 1.25rem 0 0;
+    max-width: 46ch;
+    font-size: 1.125rem;
+    color: var(--ink-muted);
+  }
+
+  /* Projects */
+  main { flex: 1; }
+  .projects { margin-top: 4.5rem; }
+  .cards { margin-top: 1.5rem; display: grid; gap: 1rem; }
+
+  .card {
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 1.5rem;
+  }
+  .card h2 {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    margin: 0;
+  }
+  .card h2 a { text-decoration: none; }
+  .card h2 a:hover { color: var(--accent); }
+  .card p { margin: .625rem 0 0; color: var(--ink-muted); }
+
+  .meta { margin-top: .875rem; display: flex; flex-wrap: wrap; gap: .5rem .75rem; }
+  .meta span { display: inline-flex; align-items: center; gap: .75rem; }
+  .meta span:not(:last-child)::after { content: "·"; color: var(--rule); }
+
+  .links { margin-top: 1.125rem; padding-top: 1.125rem; border-top: 1px solid var(--rule);
+           display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; }
+  .links a {
+    font-family: var(--font-mono);
+    font-size: .8125rem;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+  }
+  .links a:hover { color: var(--accent); text-decoration-color: currentColor; }
+
+  footer { margin-top: 6rem; padding-bottom: 3rem; }
+  footer > .wrap > div { border-top: 1px solid var(--rule); padding-top: 1.25rem; }
+  footer p { margin: 0; }
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="wordmark" href="https://herbertsabanal.com/">Herbert Sabanal</a>
+      <div class="navlinks">
+        <a class="eyebrow" href="https://herbertsabanal.com/writing">Writing</a>
+        <a class="eyebrow" href="https://github.com/jerbersoft">GitHub</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <h1>Open source</h1>
+    <p class="lead">
+      Independent .NET clients for market data APIs. Each is a third-party library — not published
+      or endorsed by the vendor whose API it speaks.
+    </p>
+
+    <section class="projects">
+      <h2 class="eyebrow">Projects</h2>
+      <div class="cards">
+
+        <article class="card">
+          <h2><a href="https://github.com/jerbersoft/databentodotnet">DatabentoDotNet</a></h2>
+          <p>
+            A .NET client for <a href="https://databento.com">Databento</a> market data — real-time
+            streaming, historical queries, and a zero-copy DBN codec that decodes without allocating
+            per record.
+          </p>
+          <div class="meta eyebrow">
+            <span>.NET 10</span><span>Apache-2.0</span><span>4 packages</span>
+          </div>
+          <div class="links">
+            <a href="https://jerbersoft.github.io/databentodotnet/">API reference</a>
+            <a href="https://github.com/jerbersoft/databentodotnet/wiki">Guides</a>
+            <a href="https://www.nuget.org/packages?q=DatabentoDotNet">NuGet</a>
+            <a href="https://github.com/jerbersoft/databentodotnet">Source</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2><a href="https://github.com/jerbersoft/fmpdotnet">FmpDotNet</a></h2>
+          <p>
+            A .NET SDK for the
+            <a href="https://site.financialmodelingprep.com/developer/docs">Financial Modeling Prep</a>
+            <code>stable</code> API, with its upstream behaviour measured against the live service
+            rather than read from the documentation.
+          </p>
+          <div class="meta eyebrow">
+            <span>.NET 10</span><span>MIT</span><span>In development</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/jerbersoft/fmpdotnet">Source</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <p class="eyebrow" style="text-transform: none; letter-spacing: normal;">© 2026 Herbert Sabanal</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
